@@ -4,6 +4,7 @@ from spc.modules.scan import run_scan
 from spc.modules.workspace import launch_workspace, list_workspaces
 from spc.modules.note import add_note, list_notes
 from spc.modules.report import generate_report
+from spc.modules.install import install_tool, install_all, list_tools
 
 
 @click.group()
@@ -80,6 +81,22 @@ def note_list(engagement):
 def report(engagement, fmt, output):
     """Generate a report from engagement notes"""
     generate_report(engagement, fmt, output)
+
+
+# ── install ───────────────────────────────────────────────────
+
+@cli.command("install")
+@click.argument("tool", required=False)
+@click.option("--all", "all_tools", is_flag=True, help="Install all extra tools")
+@click.option("--list", "show_list", is_flag=True, help="List available tools")
+def install(tool, all_tools, show_list):
+    """Install extra tools (AUR/pip) not included in the base ISO"""
+    if show_list or (not tool and not all_tools):
+        list_tools()
+    elif all_tools:
+        install_all()
+    else:
+        install_tool(tool)
 
 
 if __name__ == "__main__":

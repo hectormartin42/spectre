@@ -1,39 +1,28 @@
-# ── Base system ───────────────────────────────────────────────
-base
-base-devel
-linux
-linux-firmware
-linux-headers
-mkinitcpio
-mkinitcpio-archiso
-syslinux
-grub
-efibootmgr
-os-prober
-
-# ── Boot ──────────────────────────────────────────────────────
-memtest86+
-syslinux
+# ── NOTE ──────────────────────────────────────────────────────
+# Only official Arch Linux repo packages here.
+# AUR/BlackArch tools (ffuf, nuclei, theharvester, etc.)
+# are installed post-boot via: spc install
+# ─────────────────────────────────────────────────────────────
 
 # ── Network ───────────────────────────────────────────────────
+nmap
+wireshark-qt
+tcpdump
+arp-scan
+masscan
+hping
+traceroute
+netctl
 networkmanager
 network-manager-applet
 iwd
 wireless_tools
 wpa_supplicant
-netctl
 dhcpcd
 openssh
 curl
 wget
-
-# ── Filesystem ────────────────────────────────────────────────
-ntfs-3g
-exfat-utils
-dosfstools
-e2fsprogs
-btrfs-progs
-gparted
+bind
 
 # ── Shell & terminal ──────────────────────────────────────────
 fish
@@ -54,7 +43,7 @@ fd
 htop
 btop
 
-# ── Desktop (i3) ──────────────────────────────────────────────
+# ── Desktop ───────────────────────────────────────────────────
 xorg
 xorg-xinit
 i3-gaps
@@ -72,67 +61,40 @@ noto-fonts
 noto-fonts-emoji
 ttf-jetbrains-mono-nerd
 
-# ── ─────── Security tools ─────── ───────────────────────────
-# Network
-nmap
-wireshark-qt
-tcpdump
-netdiscover
-arp-scan
-masscan
-hping
-traceroute
-
-# Web
+# ── Security — official repos ─────────────────────────────────
 sqlmap
-gobuster
 nikto
-whatweb
-
-# Password
 john
 hashcat
 hydra
-crunch
-
-# Exploitation
 metasploit
 exploitdb
-
-# OSINT
-theharvester
-recon-ng
-
-# Forensics
 binwalk
-foremost
 sleuthkit
-autopsy
 volatility3
-
-# Reverse engineering
 ghidra
 radare2
 gdb
 ltrace
 strace
-
-# Wireless
 aircrack-ng
 bettercap
 kismet
-
-# Proxy / interception
 proxychains-ng
 tor
 torsocks
+gobuster
 
-# Utils
-wordlists
-seclists
-dirbuster
-ffuf
-nuclei
+# ── Filesystem & forensics ────────────────────────────────────
+ntfs-3g
+exfatprogs
+dosfstools
+e2fsprogs
+btrfs-progs
+gparted
+foremost
+testdisk
+ddrescue
 
 # ── Misc ──────────────────────────────────────────────────────
 zip
@@ -141,5 +103,5 @@ p7zip
 rsync
 screen
 socat
-netcat
-pwncat
+nbd
+pv
