@@ -26,6 +26,7 @@ die()  { echo -e "${RED}[!]${RESET} $*"; exit 1; }
 # ── Checks ────────────────────────────────────────────────────
 [[ "$EUID" -ne 0 ]] && die "Run as root: sudo bash iso/build.sh"
 command -v mkarchiso &>/dev/null || die "archiso not found. Install with: pacman -S archiso"
+command -v grub-install &>/dev/null || { info "Installing grub..."; pacman -S --noconfirm grub; }
 
 ARCHISO_RELENG="/usr/share/archiso/configs/releng"
 [[ -d "$ARCHISO_RELENG" ]] || die "archiso releng profile not found at $ARCHISO_RELENG"
@@ -53,7 +54,7 @@ iso_application="Spectre OS — Cybersecurity & Pentesting"
 iso_version="0.1.0"
 install_dir="arch"
 buildmodes=('iso')
-bootmodes=('bios.syslinux.mbr' 'bios.syslinux.eltorito' 'uefi-ia32.grub.esp' 'uefi-x64.grub.esp')
+bootmodes=('bios.syslinux' 'uefi.grub')
 arch="x86_64"
 pacman_conf="pacman.conf"
 airootfs_image_type="squashfs"
