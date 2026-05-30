@@ -1,0 +1,145 @@
+# ── Base system ───────────────────────────────────────────────
+base
+base-devel
+linux
+linux-firmware
+linux-headers
+mkinitcpio
+mkinitcpio-archiso
+syslinux
+grub
+efibootmgr
+os-prober
+
+# ── Boot ──────────────────────────────────────────────────────
+memtest86+
+syslinux
+
+# ── Network ───────────────────────────────────────────────────
+networkmanager
+network-manager-applet
+iwd
+wireless_tools
+wpa_supplicant
+netctl
+dhcpcd
+openssh
+curl
+wget
+
+# ── Filesystem ────────────────────────────────────────────────
+ntfs-3g
+exfat-utils
+dosfstools
+e2fsprogs
+btrfs-progs
+gparted
+
+# ── Shell & terminal ──────────────────────────────────────────
+fish
+tmux
+kitty
+neovim
+vim
+git
+python
+python-pip
+python-click
+man-db
+bat
+eza
+fzf
+ripgrep
+fd
+htop
+btop
+
+# ── Desktop (i3) ──────────────────────────────────────────────
+xorg
+xorg-xinit
+i3-gaps
+i3status
+i3lock
+rofi
+picom
+feh
+dunst
+xclip
+xdotool
+arandr
+lxappearance
+noto-fonts
+noto-fonts-emoji
+ttf-jetbrains-mono-nerd
+
+# ── ─────── Security tools ─────── ───────────────────────────
+# Network
+nmap
+wireshark-qt
+tcpdump
+netdiscover
+arp-scan
+masscan
+hping
+traceroute
+
+# Web
+sqlmap
+gobuster
+nikto
+whatweb
+
+# Password
+john
+hashcat
+hydra
+crunch
+
+# Exploitation
+metasploit
+exploitdb
+
+# OSINT
+theharvester
+recon-ng
+
+# Forensics
+binwalk
+foremost
+sleuthkit
+autopsy
+volatility3
+
+# Reverse engineering
+ghidra
+radare2
+gdb
+ltrace
+strace
+
+# Wireless
+aircrack-ng
+bettercap
+kismet
+
+# Proxy / interception
+proxychains-ng
+tor
+torsocks
+
+# Utils
+wordlists
+seclists
+dirbuster
+ffuf
+nuclei
+
+# ── Misc ──────────────────────────────────────────────────────
+zip
+unzip
+p7zip
+rsync
+screen
+socat
+netcat
+pwncat

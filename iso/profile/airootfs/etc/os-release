@@ -1,0 +1,12 @@
+NAME="Spectre OS"
+PRETTY_NAME="Spectre OS 0.1.0 (Phantom)"
+ID=spectre
+ID_LIKE=arch
+VERSION="0.1.0"
+VERSION_ID="0.1.0"
+VERSION_CODENAME=phantom
+HOME_URL="https://github.com/hectormartin42/spectre"
+DOCUMENTATION_URL="https://github.com/hectormartin42/spectre/wiki"
+BUG_REPORT_URL="https://github.com/hectormartin42/spectre/issues"
+ANSI_COLOR="1;32"
+LOGO=spectre

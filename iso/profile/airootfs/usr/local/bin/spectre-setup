@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Runs on first boot of live environment
+
+set -euo pipefail
+
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+RESET='\033[0m'
+
+BANNER="
+  ██████  ██▓███  ▓█████  ▄████▄  ▄▄▄█████▓ ██▀███  ▓█████
+▒██    ▒ ▓██░  ██▒▓█   ▀ ▒██▀ ▀█  ▓  ██▒ ▓▒▓██ ▒ ██▒▓█   ▀
+░ ▓██▄   ▓██░ ██▓▒▒███   ▒▓█    ▄ ▒ ▓██░ ▒░▓██ ░▄█ ▒▒███
+  ▒   ██▒▒██▄█▓▒ ▒▒▓█  ▄ ▒▓▓▄ ▄██▒░ ▓██▓ ░ ▒██▀▀█▄  ▒▓█  ▄
+▒██████▒▒▒██▒ ░  ░░▒████▒▒ ▓███▀ ░  ▒██▒ ░ ░██▓ ▒██▒░▒████▒
+"
+
+clear
+echo -e "${GREEN}${BANNER}${RESET}"
+echo -e "${CYAN}  Welcome to Spectre OS — Phantom Edition${RESET}"
+echo -e "${CYAN}  github.com/hectormartin42/spectre${RESET}\n"
+
+echo -e "${GREEN}[*]${RESET} Starting NetworkManager..."
+systemctl start NetworkManager 2>/dev/null || true
+
+echo -e "${GREEN}[*]${RESET} Installing spc CLI..."
+pip install --quiet --user click
+pip install --quiet --user -e /opt/spectre 2>/dev/null || true
+
+echo -e "${GREEN}[*]${RESET} Ready. Run ${CYAN}spc${RESET} to get started.\n"
+echo -e "  ${CYAN}spc workspace web${RESET}      — launch web pentesting workspace"
+echo -e "  ${CYAN}spc workspace network${RESET}  — launch network recon workspace"
+echo -e "  ${CYAN}spc scan -t <ip>${RESET}       — quick scan"
+echo ""

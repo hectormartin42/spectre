@@ -1,0 +1,14 @@
+[Unit]
+Description=Spectre OS first-boot setup
+After=network.target
+ConditionPathExists=!/var/lib/spectre/.setup-done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/spectre-setup
+ExecStartPost=/bin/mkdir -p /var/lib/spectre
+ExecStartPost=/bin/touch /var/lib/spectre/.setup-done
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

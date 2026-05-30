@@ -14,6 +14,8 @@
 [![Version](https://img.shields.io/badge/version-0.1.0-cyan.svg)](https://github.com/hectormartin42/spectre/releases)
 [![Platform](https://img.shields.io/badge/platform-Arch%20%7C%20Debian-blue.svg)](#installation)
 [![CI](https://github.com/hectormartin42/spectre/actions/workflows/ci.yml/badge.svg)](https://github.com/hectormartin42/spectre/actions)
+[![ISO Build](https://github.com/hectormartin42/spectre/actions/workflows/iso.yml/badge.svg)](https://github.com/hectormartin42/spectre/actions/workflows/iso.yml)
+[![Release](https://img.shields.io/github/v/release/hectormartin42/spectre?color=green)](https://github.com/hectormartin42/spectre/releases)
 
 </div>
 
@@ -173,6 +175,34 @@ Spectre ships with a pre-configured desktop environment:
 - Foremost — file carving
 
 </details>
+
+---
+
+## ISO
+
+Download the latest bootable ISO from [Releases](https://github.com/hectormartin42/spectre/releases) or build it yourself:
+
+```bash
+# Requires Arch Linux + archiso
+sudo pacman -S archiso
+sudo bash iso/build.sh
+```
+
+**Boot options:**
+- `Spectre OS` — standard live environment
+- `Forensics Mode` — no swap, no automount (safe for evidence collection)
+
+**Write to USB:**
+```bash
+sudo dd if=spectre-os-*.iso of=/dev/sdX bs=4M status=progress && sync
+```
+
+**Test in QEMU:**
+```bash
+qemu-system-x86_64 -m 4G -cdrom spectre-os-*.iso -boot d -enable-kvm
+```
+
+See [iso/README.md](iso/README.md) for full build documentation.
 
 ---
 
