@@ -1,0 +1,83 @@
+# Spectre — i3 window manager config
+
+set $mod Mod4
+
+font pango:JetBrainsMono Nerd Font 10
+
+# ── Colors ──────────────────────────────────────────────
+set $bg         #0a0e0f
+set $fg         #c0caf5
+set $accent     #00ff9f
+set $accent2    #00d4ff
+set $urgent     #f7768e
+set $inactive   #1a1f2e
+
+# class                 border    bg        text   indicator  child_border
+client.focused          $accent   $bg       $fg    $accent2   $accent
+client.focused_inactive $inactive $bg       $fg    $inactive  $inactive
+client.unfocused        $inactive $bg       $fg    $inactive  $inactive
+client.urgent           $urgent   $urgent   $fg    $urgent    $urgent
+
+# ── Keybindings ─────────────────────────────────────────
+bindsym $mod+Return exec kitty
+bindsym $mod+d exec rofi -show drun -theme ~/.config/rofi/spectre.rasi
+bindsym $mod+q kill
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec i3-nagbar -t warning -m 'Exit Spectre?' -B 'Yes' 'i3-msg exit'
+
+# Workspace launchers
+bindsym $mod+F1 exec kitty -e bash -c "spc workspace web"
+bindsym $mod+F2 exec kitty -e bash -c "spc workspace network"
+bindsym $mod+F3 exec kitty -e bash -c "spc workspace red-team"
+bindsym $mod+F4 exec kitty -e bash -c "spc workspace osint"
+
+# Move focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Workspaces
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+
+# Layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+Shift+space floating toggle
+
+# Gaps (requires i3-gaps)
+gaps inner 8
+gaps outer 4
+smart_gaps on
+smart_borders on
+
+# ── Bar ─────────────────────────────────────────────────
+bar {
+    position top
+    status_command i3status
+    colors {
+        background $bg
+        statusline $fg
+        separator  $inactive
+        focused_workspace  $accent   $accent  $bg
+        active_workspace   $inactive $inactive $fg
+        inactive_workspace $inactive $bg      $fg
+        urgent_workspace   $urgent   $urgent  $fg
+    }
+}
+
+# ── Autostart ───────────────────────────────────────────
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id feh --bg-scale ~/.config/spectre/wallpaper.png
