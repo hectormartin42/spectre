@@ -104,13 +104,32 @@ cp "$REPO_DIR/setup.py" "$PROFILE_DIR/airootfs/opt/spectre/"
 cp -r "$REPO_DIR/workspaces" "$PROFILE_DIR/airootfs/opt/spectre/"
 cp -r "$REPO_DIR/config" "$PROFILE_DIR/airootfs/opt/spectre/"
 
-# Root shell: fish + spc banner on login
+# Install spc CLI into the live system Python path
+log "Installing spc into live system..."
+pip install --root "$PROFILE_DIR/airootfs" --no-deps click 2>/dev/null || true
+cp -r "$REPO_DIR/spc" "$PROFILE_DIR/airootfs/usr/lib/python3/dist-packages/" 2>/dev/null || \
+  cp -r "$REPO_DIR/spc" "$PROFILE_DIR/airootfs/usr/lib/python3.14/site-packages/" 2>/dev/null || true
+cp "$REPO_DIR/spc/main.py" "$PROFILE_DIR/airootfs/usr/local/bin/spc"
+chmod +x "$PROFILE_DIR/airootfs/usr/local/bin/spc"
+
+# Create spc entrypoint
+cat > "$PROFILE_DIR/airootfs/usr/local/bin/spc" <<'EOFSPC'
+#!/usr/bin/env python3
+import sys
+sys.path.insert(0, '/opt/spectre')
+from spc.main import cli
+cli()
+EOFSPC
+chmod +x "$PROFILE_DIR/airootfs/usr/local/bin/spc"
+
+# Root shell config
 mkdir -p "$PROFILE_DIR/airootfs/root"
 cat >> "$PROFILE_DIR/airootfs/root/.bash_profile" <<'EOF'
 
 # Spectre
-export PATH="$HOME/.local/bin:/opt/spectre:$PATH"
+export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
 export SPECTRE_HOME="$HOME/.spectre"
+export PYTHONPATH="/opt/spectre:$PYTHONPATH"
 cd /root
 EOF
 
